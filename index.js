@@ -11,7 +11,8 @@ const { MONGODB } = require('./config.js');
 // ApolloServer is just using express server
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: ({ req }) => ({ req }) // make request heards, body, etc. accessible
 });
 
 const connectionString = MONGODB;
