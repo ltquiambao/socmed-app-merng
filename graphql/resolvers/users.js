@@ -1,10 +1,11 @@
+const { UserInputError } = require('apollo-server');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const { validateRegisterInput, validateLoginInput } = require('../../util/validators');
 const { SECRET_KEY } = require('../../config')
 const User = require('../../models/User');
-const { UserInputError } = require('apollo-server');
+
 
 function generateToken(user) {
   return jwt.sign(
@@ -55,7 +56,7 @@ module.exports = {
       const res = await newUser.save();
 
       const token = generateToken(res);
-      
+
       return {
         id: res._id,
         email: res.email,
